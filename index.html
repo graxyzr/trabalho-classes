@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercício JS - Classes e Objetos</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <h1>Dados de Turmas:</h1>
+    <div id="imprimeAqui"></div>
+
+    <script>
+
+        class Pessoa {
+            constructor(cpf, nome) {
+                this.cpf = cpf;
+                this.nome = nome;
+            }
+        }
+
+        class Professor extends Pessoa {
+            constructor(cpf, nome, area, telefone) {
+                super(cpf, nome);
+                this.area = area;
+                this.telefone = telefone;
+            }
+        }
+
+        class Aluno extends Pessoa {
+            constructor(cpf, nome, matricula) {
+                super(cpf, nome);
+                this.matricula = matricula;
+            }
+        }
+
+        class Turma {
+            constructor(professor, alunos, identificacao) {
+                this.professor = professor;
+                this.alunos = alunos;
+                this.identificacao = identificacao;
+            }
+
+            imprimeDados() {
+                console.log(`Turma: ${this.identificacao}`);
+                console.log(`Professor: ${this.professor.nome} (CPF: ${this.professor.cpf})`);
+                console.log("Alunos:");
+
+                for (let i = 0; i < this.alunos.length; i++) {
+                    const aluno = this.alunos[i];
+                    console.log(`${aluno.nome} (CPF: ${aluno.cpf}, Matrícula: ${aluno.matricula})`);
+                }
+            }
+        }
+
+        let professor1 = new Professor("93765432105", "Prof. Girafales", "Aritmética", "999-999-9999");
+        let professor2 = new Professor("93627381628", "Prof. Florinda", "Artes", "999-999-9990")
+
+        let alunos = [
+            new Aluno("98847362839", "Quico", "2023001"),
+            new Aluno("98453467313", "Chaves", "2023002"),
+            new Aluno("98738263940", "Chiquinha", "2023003"),
+            new Aluno("98246385937", "Popis", "2023004"),
+            new Aluno("98483839238", "Paty", "2023005"),
+            new Aluno("98233727323", "Godínez", "2023006"),
+            new Aluno("98732382372", "Ñoño", "2023007"),
+            new Aluno("98732232737", "Seu Madruga", "2023008")
+        ];
+
+        let turma1 = new Turma(professor1, alunos.slice(0, 4), "Turma de Aritmética 101");
+        let turma2 = new Turma(professor2, alunos.slice(4, 8), "Turma de Artes 101");
+
+        function imprimirTurma(turma, container) {
+            let div = document.createElement("div");
+
+            div.innerHTML = `<h2><u>${turma.identificacao}</u></h2>`;
+            div.innerHTML += `<p><strong>Professor:</strong> ${turma.professor.nome} (CPF: ${turma.professor.cpf})</p><br>`;
+            div.innerHTML += "<p><strong>Alunos:</strong></p>";
+
+            for (let aluno of turma.alunos) {
+
+                div.innerHTML += `<p>${aluno.nome} (CPF: ${aluno.cpf}, Matrícula: ${aluno.matricula})</p>`;
+
+            }
+
+            container.appendChild(div);
+
+        }
+
+        let container = document.getElementById("imprimeAqui");
+        imprimirTurma(turma1, container);
+        imprimirTurma(turma2, container);
+
+    </script>
+</body>
+
+</html>
