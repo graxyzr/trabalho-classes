@@ -84,7 +84,7 @@
             let div = document.createElement("div");
 
             div.innerHTML = `<h2><u>${turma.identificacao}</u></h2>`;
-            div.innerHTML += `<p><strong>Professor:</strong> ${turma.professor.nome} (CPF: ${turma.professor.cpf})</p><br>`;
+            div.innerHTML += `<p><strong>Professor:</strong> ${turma.professor.nome} (CPF: ${turma.professor.cpf}, Área: ${turma.professor.area}, Telefone: ${turma.professor.telefone})</p><br>`;
             div.innerHTML += "<p><strong>Alunos:</strong></p>";
 
             for (let aluno of turma.alunos) {
